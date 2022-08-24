@@ -9,7 +9,7 @@ class TestBooksCollector:
     # обязательно указывать префикс test_
     # дальше идет название метода, который тестируем add_new_book_
     # затем, что тестируем add_two_books - добавление двух книг
-    def test_add_new_book_add_two_books(self):
+    def test_add_new_book(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
@@ -21,7 +21,7 @@ class TestBooksCollector:
         # словарь books_rating, который нам возвращает метод get_books_rating, имеет длину 2
         assert len(collector.get_books_rating()) == 2
 
-    def test_set_book_rating_three_to_exciting_book(self):
+    def test_set_book_rating_to_exciting_book(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
@@ -31,7 +31,7 @@ class TestBooksCollector:
         collector.add_new_book(name)
         collector.set_book_rating(name, rating)
 
-        assert collector.books_rating[name] in range(1, 11)
+        assert collector.books_rating[name] == 3
 
     def test_get_book_rating(self):
         # создаем экземпляр (объект) класса BooksCollector
@@ -43,10 +43,10 @@ class TestBooksCollector:
         collector.add_new_book(name)
         collector.set_book_rating(name, rating)
 
-        assert type(collector.get_book_rating(name)) == int
-        assert collector.get_book_rating(name)
+        assert collector.books_rating[name] == rating
+        assert list(collector.books_rating.keys())[0] == name
 
-    def test_get_books_with_specific_rating_ten(self):
+    def test_get_books_with_specific_rating(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
@@ -58,7 +58,7 @@ class TestBooksCollector:
 
         assert len(collector.get_books_with_specific_rating(rating)) == 1
 
-    def test_get_books_rating_two_books(self):
+    def test_get_books_rating(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
@@ -72,10 +72,9 @@ class TestBooksCollector:
 
         collector.add_new_book(name2)
 
-        assert type(collector.get_books_rating()) == dict
         assert len(collector.get_books_rating()) == 2
 
-    def test_add_book_in_favorites_one_book(self):
+    def test_add_book_in_favorites(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
@@ -91,7 +90,7 @@ class TestBooksCollector:
         assert len(collector.favorites) > 0
         assert name in collector.favorites
 
-    def test_delete_book_from_favorites_only_book(self):
+    def test_delete_book_from_favorites(self):
         # создаем экземпляр (объект) класса BooksCollector
         collector = BooksCollector()
 
